@@ -1,0 +1,36 @@
+{
+    "name": "pkvs/pkvsProject",
+    "license": "proprietary",
+    "type": "project",
+    "description": "pkvsEngine default project skeleton",
+
+    "homepage": "https://git.1tv.com/pkvs/pkvsProject",
+
+    "scripts": {
+        "post-install-cmd": [
+            "php scripts/install.php"
+        ]
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "git@git.1tv.com:pkvs/pkvsProject.git"
+    },
+
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@git.1tv.com:pkvs/pkvsEngine.git"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4.0",
+        "pkvs/pkvsEngine" : "^2",
+        "composer/composer" : "^1"
+    },
+
+    "require-dev" : {
+    }
+
+}
