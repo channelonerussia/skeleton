@@ -8,8 +8,15 @@
 
     "scripts": {
         "post-install-cmd": [
-            "php scripts/install.php"
+            "pkvs\\scripts\\Config::make",
+            "pkvs\\scripts\\Controller::make"
         ]
+    },
+
+    "autoload": {
+        "psr-4": {
+            "pkvs\\scripts\\": "./scripts"
+        }
     },
 
     "repository": {
@@ -17,9 +24,11 @@
         "url": "git@git.1tv.com:pkvs/pkvsProject.git"
     },
 
+    "prefer-stable" : true,
+
     "repositories": [
         {
-            "type": "git",
+            "type": "vcs",
             "url": "git@git.1tv.com:pkvs/pkvsEngine.git"
         }
     ],

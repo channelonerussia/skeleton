@@ -1,0 +1,81 @@
+<FilesMatch "\.(engine|inc|info|install|module|profile|po|schema|sh|.*sql|theme|tpl(\.php)?|xtmpl)$|^(code-style\.pl|Entries.*|Repository|Root|Tag|Template)$">
+  Order allow,deny
+</FilesMatch>
+
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+
+# Follow symbolic links in this directory.
+Options +FollowSymLinks
+
+# Customized error messages.
+ErrorDocument 404 /404
+
+# Set the default handler.
+DirectoryIndex /index.php
+
+
+
+RewriteEngine on
+
+RewriteCond %{HTTP:Range} bytes=0-[0-9]+, [NC,OR]
+RewriteCond %{HTTP:Range} bytes=([0-9-],){4,} [NC,OR]
+RewriteCond %{HTTP:Range} bytes=[0-9,-]+,0-(,|$) [NC]
+RewriteRule .? http://%{SERVER_NAME}/ [NS,L,F]
+
+RewriteBase /
+
+RewriteRule ^img([/]{0,1}[a-z_]*)/([0-9\-]{10})/(fmt_[0-9]{2,3})_(.*)(\.JPG|\.PNG|\.GIF|\.jpeg|\.jpg|\.png|\.gif)$ http://www.1tv.com/ig/$2/$3/$4$5$1 [R,L]
+
+RewriteRule ^b/(.*) http://projects.1tvrus.com/b/$1 [R,L]
+
+RewriteRule ^events/5916 /maevka [R=301,L]
+
+RewriteRule ^favicon.ico(.*) /im/icons/favicon.ico [R=301,L]
+RewriteRule ^browserconfig.xml /im/icons/browserconfig.xml [R=301,L]
+RewriteRule ^manifest.json /im/icons/manifest.json [R=301,L]
+RewriteRule ^safari-pinned-tab.svg /im/icons/safari-pinned-tab.svg [R=301,L]
+RewriteRule ^apple-touch-icon-36x36(.*) /im/icons/apple-touch-icon-36x36.png [R=301,L]
+RewriteRule ^apple-touch-icon-48x48(.*) /im/icons/apple-touch-icon-48x48.png [R=301,L]
+RewriteRule ^apple-touch-icon-72x72(.*) /im/icons/apple-touch-icon-72x72.png [R=301,L]
+RewriteRule ^apple-touch-icon-96x96(.*) /im/icons/apple-touch-icon-96x96.png [R=301,L]
+RewriteRule ^apple-touch-icon-144x144(.*) /im/icons/apple-touch-icon-144x144.png [R=301,L]
+RewriteRule ^apple-touch-icon-192x192(.*) /im/icons/apple-touch-icon-192x192.png [R=301,L]
+RewriteRule ^apple-touch-icon(.*) /im/icons/apple-touch-icon.png [R=301,L]
+
+
+# Перебрасываем на разделы каналов
+RewriteCond %{HTTP_HOST} ^muz1.tv [NC]
+RewriteRule ^(.*)$ http://www.muz1.tv/$1 [L,R=301]
+
+
+# Rewrite URLs of the form 'index.php'.
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+
+FileETag MTime Size
+
+<ifmodule mod_expires.c>
+	<filesMatch "\.(js|css|swf)$">
+		ExpiresActive on
+		ExpiresDefault "access plus 7 days"
+	</filesMatch>
+	<filesMatch "\.(ico|pdf|flv|mp4|jpg|jpeg|png|gif)$">
+		ExpiresActive on
+		ExpiresDefault "access plus 30 days"
+	</filesMatch>
+</ifmodule>
+
+<ifModule mod_headers.c>
+	<filesMatch "\.(ico|pdf|flv|mp4|jpg|jpeg|png|gif|js|css|swf)$">
+		Header unset ETag
+		FileETag None
+	</filesMatch>
+</ifModule>
+
+
+php_value zlib.output_compression 1
+php_value magic_quotes_gpc Off
