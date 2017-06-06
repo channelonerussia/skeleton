@@ -9,8 +9,8 @@
     "scripts": {
         "post-install-cmd": [
             "pkvs\\scripts\\Skeleton::makeTemp",
-            "pkvs\\scripts\\Skeleton::move",
-            "pkvs\\scripts\\Skeleton::clean"
+            "pkvs\\scripts\\Skeleton::moveTemp",
+            "pkvs\\scripts\\Skeleton::cleanAll"
         ]
     },
 
