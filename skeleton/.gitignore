@@ -1,0 +1,5 @@
+/config/base.php
+/vendor
+/node_modules
+/.idea
+composer.lock

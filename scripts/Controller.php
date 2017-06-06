@@ -17,6 +17,7 @@ class Controller
 
         $replaces = [];
         foreach ($config as $key => $value) {
+            $replaces['{{ ' . $key . ' }}'] = $value;
             $replaces['{{' . $key . '}}'] = $value;
         }
 

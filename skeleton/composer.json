@@ -1,0 +1,39 @@
+{
+    "name": "pkvs/{{ siteCode }}",
+    "license": "proprietary",
+    "type": "project",
+    "description": "{{ siteName }}",
+
+    "homepage": "https://git.1tv.com/pkvs/{{ siteCode }}",
+
+    "autoload": {
+        "psr-4": {
+            "{{ siteCode }}\\": "./src"
+        }
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "git@git.1tv.com:pkvs/{{ siteCode }}.git"
+    },
+
+    "prefer-stable" : true,
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@git.1tv.com:pkvs/pkvsEngine.git"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.4.0",
+        "twig/twig": "^1",
+        "pkvs/pkvsEngine" : "^2",
+        "composer/composer" : "^1"
+    },
+
+    "require-dev" : {
+    }
+
+}

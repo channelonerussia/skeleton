@@ -1,4 +1,4 @@
-# pkvsProject
+# Установка
 
 ## Требования к установленному ПО
 
@@ -7,6 +7,5 @@
 
 Composer и PHP должны быть установлены глобально и доступны из командной строки.
 
-## Установка нового проекта
 
- > composer create-project git@git.1tv.com:pkvs/pkvsProject.git my_project_name
+

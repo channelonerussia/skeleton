@@ -9,7 +9,10 @@ class helloController extends Controller
 
     public function actionIndex()
     {
-        return $this->renderTwig('hello.twig.html', null);
+        $data = [
+            'name' => 'World'
+        ];
+        return $this->renderTwig('hello.twig.html', $data);
     }
 
 }

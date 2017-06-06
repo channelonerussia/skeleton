@@ -8,8 +8,9 @@
 
     "scripts": {
         "post-install-cmd": [
-            "pkvs\\scripts\\Config::make",
-            "pkvs\\scripts\\Controller::make"
+            "pkvs\\scripts\\Skeleton::makeTemp",
+            "pkvs\\scripts\\Skeleton::move",
+            "pkvs\\scripts\\Skeleton::clean"
         ]
     },
 
@@ -35,7 +36,6 @@
 
     "require": {
         "php": ">=5.4.0",
-        "pkvs/pkvsEngine" : "^2",
         "composer/composer" : "^1"
     },
 
