@@ -43,6 +43,21 @@ class Skeleton
     }
 
 
+    public static function showMessage(Event $event)
+    {
+        $event->getIO()->write("\n\nDone.\n");
+        $event->getIO()->write("Next steps:
+ * Add dev domain to c:\\Windows\\System32\\drivers\\etc\\ or /etc/hosts
+ * Add VirtualHost to Apache configuration or server to Nginx
+ * Create new project at git.1tv.com
+ * Initialize Git in project directory (follow the instructions from previous step, see \"Existing folder\")
+ * composer install
+ * npm install
+ * gulp build-init
+");
+    }
+
+
     private static function getReplaces(Event $event)
     {
         $replaces = [
