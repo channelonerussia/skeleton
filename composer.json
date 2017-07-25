@@ -7,7 +7,7 @@
     "homepage": "https://git.1tv.com/pkvs/pkvsProject",
 
     "scripts": {
-        "post-install-cmd": [
+        "post-create-project-cmd": [
             "pkvs\\scripts\\Skeleton::makeTemp",
             "pkvs\\scripts\\Skeleton::makeConfig",
             "pkvs\\scripts\\Skeleton::moveTemp",
