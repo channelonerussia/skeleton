@@ -29,7 +29,7 @@ class Skeleton
         @chmod(self::PATH, self::DIR_CHMOD);
         $replaces = self::getReplaces($event);
         self::copyWithReplace(self::PATH, self::TEMP, $replaces);
-        copy(self::CONFIG_DIST, self::CONFIG);
+        copy(self::TEMP . self::CONFIG_DIST, self::TEMP . self::CONFIG);
     }
 
 
@@ -38,13 +38,6 @@ class Skeleton
         $replaces = self::getReplaces($event);
         self::copyWithReplace(self::PATH . self::CONFIG_DIST, self::CONFIG_DIST, $replaces);
     }
-
-    public static function test(Event $event)
-    {
-        $replaces = self::getReplaces($event);
-        print_r($replaces);
-    }
-
 
     public static function cleanAll()
     {
@@ -64,10 +57,10 @@ class Skeleton
  * Create new project at git.1tv.com
  * Initialize Git in project directory (follow the instructions from previous step, see \"Existing folder\")
  * Verify config/base.php, gulpconfig.js, change src/images/logo.png
- * Run:
- *  $ composer install
- *  $ npm install
- *  $ gulp build-init
+ Run:
+ $ composer install
+ $ npm install
+ $ gulp build-init
 ");
     }
 
