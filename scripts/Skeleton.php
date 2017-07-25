@@ -11,6 +11,7 @@ class Skeleton
 
     const PATH = './skeleton';
     const TEMP = './skeleton.temp';
+    const VENDOR = './vendor';
 
     const CONFIG = '/config/base.php';
 
@@ -42,6 +43,7 @@ class Skeleton
         self::cleanTemp();
         self::cleanPath();
         self::cleanGit();
+        self::removeDirectory(self::VENDOR);
     }
 
 
@@ -53,9 +55,11 @@ class Skeleton
  * Add VirtualHost to Apache configuration or server to Nginx
  * Create new project at git.1tv.com
  * Initialize Git in project directory (follow the instructions from previous step, see \"Existing folder\")
- * composer install
- * npm install
- * gulp build-init
+ * Verify config/base.php, gulpconfig.js, change src/images/logo.png
+ * Run:
+ *  $ composer install
+ *  $ npm install
+ *  $ gulp build-init
 ");
     }
 
@@ -167,22 +171,22 @@ class Skeleton
     public static function moveTemp(Event $event)
     {
 
-        $currentDir = __DIR__ . '/..';
+        $dest = realpath(__DIR__ . '/..');
 
-        $basePath = realpath($currentDir);
-
-        $it = new \RecursiveDirectoryIterator(self::TEMP, \RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::SELF_FIRST);
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator(self::TEMP, \RecursiveDirectoryIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
         foreach ($files as $file) {
             if ($file->isDir()){
-                $currentDir = str_replace(realpath(self::TEMP), $basePath, $file->getRealPath());
-                $event->getIO()->write("Directory: " . $currentDir);
-                @mkdir($currentDir, self::DIR_CHMOD);
+                $dirName = $dest . DIRECTORY_SEPARATOR . $files->getSubPathName();
+                $event->getIO()->write("Directory: " . $dirName);
+                @mkdir($dirName, self::DIR_CHMOD);
             } else {
-                $filePath = str_replace(realpath(self::TEMP), $basePath, $file->getRealPath());
-                $event->getIO()->write('  File: ' . $file->getRealPath() . ' -> ' . $filePath);
-                @copy($file->getRealPath(), $currentDir . '/' . $file->getFilename());
-                @chmod($currentDir . '/' . $file->getFilename(), self::FILE_CHMOD);
+                $fileName = $dest . DIRECTORY_SEPARATOR . $files->getSubPathName();
+                $event->getIO()->write('  File: ' . $file->getRealPath() . ' -> ' .$fileName);
+                @copy($file, $fileName);
+                @chmod($fileName, self::FILE_CHMOD);
             }
         }
 
