@@ -3,3 +3,9 @@
 /node_modules
 /.idea
 composer.lock
+/www/js
+/www/css
+/www/images
+/src/views/layout/icons.html
+/src/views/layout/layout.twig
+faviconData.json

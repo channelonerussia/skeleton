@@ -1,0 +1,90 @@
+{% spaceless %}
+
+{% set _out = block('out') %}
+{% set _title = block('title')|raw|striptags %}
+{% if _title is not empty %}
+    {% set _title = _title ~ ' - ' %}
+{% endif %}
+{% set _title = _title ~ '{{siteName}}' %}
+
+{% set _description = block('description')|raw|striptags %}
+{% if _description is empty %}
+    {% set _description = _title|raw %}
+{% endif %}
+
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    {% set meta = html.get('meta') %}
+    {% set meta = {'og:title': _title|raw}|merge(meta) %}
+    {% set meta = {'og:description': _description|raw}|merge(meta) %}
+    {% set meta = {'og:url': request.siteURL ~ '/' ~ request.fullRequest}|merge(meta) %}
+    {% set meta = {description: _description|raw}|merge(meta) %}
+    {% if (meta.keywords is not empty) %}
+        {% set metaKeywords = meta.keywords ~ ", {{siteName}}" %}
+        {% set meta = meta|merge({keywords: metaKeywords}) %}
+    {% else %}
+        {% set meta = {keywords: "{{siteName}}"}|merge(meta) %}
+    {% endif %}
+
+    {% for name, contentArr in meta %}
+        {% if contentArr is iterable %}
+            {% for content in contentArr %}
+                {% if name|slice(0,3) == 'og:' %}
+                    <meta property="{{ name }}" content="{{ content|raw }}">
+                {% else %}
+                    <meta name="{{ name }}" content="{{ content|raw }}">
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {% if name|slice(0,3) == 'og:' %}
+                <meta property="{{ name }}" content="{{ contentArr|raw }}">
+            {% else %}
+                <meta name="{{ name }}" content="{{ contentArr|raw }}">
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+    <title>{{ _title }}</title>
+
+    {% include 'layout/icons.html' %}
+
+    {% if config.debug %}
+        <link rel="stylesheet" href="/css/css.css">
+    {% else %}
+        <link rel="stylesheet" href="/css/css.min.css">
+    {% endif %}
+
+    {% set x = html.get('css') %}
+    {% for css in x %}
+        <link type="text/css" rel="stylesheet" media="all" href="{{ css }}" />
+    {% endfor %}
+
+</head>
+
+<body>
+
+
+<div id="logo"></div>
+
+{{ _out|raw }}
+
+
+{% set x = html.get('js') %}
+{% for js in x %}
+    <script src="{{ js }}"></script>
+{% endfor %}
+
+{% if config.debug %}
+    <script src="/js/js.js" type="text/javascript" language="javascript"></script>
+{% else %}
+    <script src="/js/js.min.js" type="text/javascript" language="javascript"></script>
+{% endif %}
+
+</body>
+</html>
+
+{% endspaceless %}

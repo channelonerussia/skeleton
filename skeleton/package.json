@@ -1,0 +1,46 @@
+{
+  "name": "channel1-2017",
+  "version": "0.0.1",
+  "description": "Channel One Russia Worldwide",
+  "license": "ISC",
+  "homepage": "https://git.1tv.com/pkvs/1tv.com-2017",
+  "repository": {
+    "type": "git",
+    "url": "git@git.1tv.com:pkvs/1tv.com-2017.git"
+  },
+  "scripts": {
+    "npm init": "npm install",
+    "composer init": "composer install",
+    "gulp init": "gulp build-init"
+  },
+  "author": "Dmitry Elfimov",
+  "contributors": [],
+  "devDependencies": {
+    "gulp": "^3.9",
+    "gulp-autoprefixer": "^3",
+    "gulp-changed": "^2",
+    "gulp-clean-css": "^3",
+    "gulp-concat": "^2",
+    "gulp-fontello": "^0.4.6",
+    "gulp-if": "^2",
+    "gulp-imagemin": "^3",
+    "gulp-minify-css": "^1",
+    "gulp-print": "^2",
+    "gulp-real-favicon": "^0.2",
+    "gulp-rename": "^1",
+    "gulp-rigger": "^0.5",
+    "gulp-sass": "^3",
+    "gulp-css-base64": "^1",
+    "gulp-sourcemaps": "^2",
+    "gulp-uglify": "^2",
+    "gulp-watch": "^4",
+    "imagemin-pngquant": "^5",
+    "pump": "^1",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1"
+  },
+  "dependencies": {
+    "jquery": "^3",
+    "normalize.css": "^6.0.0"
+  }
+}

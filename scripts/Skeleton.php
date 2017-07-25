@@ -23,6 +23,8 @@ class Skeleton
         // $event->getName(); // имя события
         // $event->getComposer()->getPackage()->getName() // имя пакета
         self::cleanTemp();
+        @mkdir(self::PATH);
+        @chmod(self::PATH, self::DIR_CHMOD);
         $replaces = self::getReplaces($event);
         self::copyWithReplace(self::PATH, self::TEMP, $replaces);
     }
@@ -103,6 +105,9 @@ class Skeleton
 
         $event->getIO()->write("Site code, unique alphanumeric code (): ");
         $replaces['{{siteCode}}'] = self::askText('');
+
+        $event->getIO()->write("Site URL (): ");
+        $replaces['{{siteURL}}'] = self::askText('');
 
         $event->getIO()->write("PSR-16 cache namespace, [a-z0-9]+ (): ");
         $replaces['{{cacheNamespace}}'] = self::askText('');

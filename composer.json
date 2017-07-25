@@ -1,5 +1,5 @@
 {
-    "name": "pkvs/pkvsProject",
+    "name": "pkvs/skeleton",
     "license": "proprietary",
     "type": "project",
     "description": "pkvsEngine default project skeleton",
@@ -9,6 +9,7 @@
     "scripts": {
         "post-install-cmd": [
             "pkvs\\scripts\\Skeleton::makeTemp",
+            "pkvs\\scripts\\Skeleton::makeConfig",
             "pkvs\\scripts\\Skeleton::moveTemp",
             "pkvs\\scripts\\Skeleton::cleanAll",
             "pkvs\\scripts\\Skeleton::showMessage"
