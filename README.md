@@ -9,4 +9,4 @@ Composer и PHP должны быть установлены глобально 
 
 ## Установка нового проекта
 
- > composer create-project pkvs/skeleton my_project_name
+ > composer create-project pkvs/skeleton my_project_name -s dev
