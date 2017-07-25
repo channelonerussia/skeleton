@@ -71,6 +71,7 @@ class Skeleton
 
             '{{siteName}}' => 'pkvstest',
             '{{siteCode}}' => 'pkvstest',
+            '{{cacheNamespace}}' => 'pkvstest',
 
             '{{locale}}' => 'ru_RU.UTF-8',
             '{{codepage}}' => 'UTF-8',
@@ -102,6 +103,9 @@ class Skeleton
 
         $event->getIO()->write("Site code, unique alphanumeric code (): ");
         $replaces['{{siteCode}}'] = self::askText('');
+
+        $event->getIO()->write("PSR-16 cache namespace, [a-z0-9]+ (): ");
+        $replaces['{{cacheNamespace}}'] = self::askText('');
 
         $event->getIO()->write("System locale (ru_RU.UTF-8): ");
         $replaces['{{locale}}'] = self::askText('ru_RU.UTF-8');
