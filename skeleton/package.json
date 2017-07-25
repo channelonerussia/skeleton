@@ -1,12 +1,12 @@
 {
-  "name": "channel1-2017",
+  "name": "{{ siteCode }}",
   "version": "0.0.1",
-  "description": "Channel One Russia Worldwide",
+  "description": "{{ siteName }}",
   "license": "ISC",
-  "homepage": "https://git.1tv.com/pkvs/1tv.com-2017",
+  "homepage": "https://git.1tv.com/pkvs/siteCode",
   "repository": {
     "type": "git",
-    "url": "git@git.1tv.com:pkvs/1tv.com-2017.git"
+    "url": "git@git.1tv.com:pkvs/siteCode.git"
   },
   "scripts": {
     "npm init": "npm install",

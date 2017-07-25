@@ -56,7 +56,8 @@ class Skeleton
  * Add VirtualHost to Apache configuration or server to Nginx
  * Create new project at git.1tv.com
  * Initialize Git in project directory (follow the instructions from previous step, see \"Existing folder\")
- * Verify config/base.php, gulpconfig.js, change src/images/logo.png
+ * Verify config/base.php, gulpconfig.js, package.json, composer.json
+ * Change src/images/logo.png
  Run:
  $ composer install
  $ npm install
