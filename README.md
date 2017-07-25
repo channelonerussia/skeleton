@@ -9,4 +9,4 @@ Composer и PHP должны быть установлены глобально 
 
 ## Установка нового проекта
 
- > composer create-project git@git.1tv.com:pkvs/pkvsProject.git my_project_name
+ > composer create-project channelonerussia/skeleton.git my_project_name

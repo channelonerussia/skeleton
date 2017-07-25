@@ -26,6 +26,7 @@
         "url": "git@git.1tv.com:pkvs/pkvsProject.git"
     },
 
+    "minimum-stability" : "dev",
     "prefer-stable" : true,
 
     "repositories": [
