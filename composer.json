@@ -9,7 +9,6 @@
     "scripts": {
         "post-create-project-cmd": [
             "pkvs\\scripts\\Skeleton::makeTemp",
-            "pkvs\\scripts\\Skeleton::makeConfig",
             "pkvs\\scripts\\Skeleton::moveTemp",
             "pkvs\\scripts\\Skeleton::cleanAll",
             "pkvs\\scripts\\Skeleton::showMessage"
