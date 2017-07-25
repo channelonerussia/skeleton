@@ -14,6 +14,7 @@ class Skeleton
     const VENDOR = './vendor';
 
     const CONFIG = '/config/base.php';
+    const CONFIG_DIST = '/config/base.php.dist';
 
     const DIR_CHMOD = 0775;
     const FILE_CHMOD = 0664;
@@ -28,13 +29,20 @@ class Skeleton
         @chmod(self::PATH, self::DIR_CHMOD);
         $replaces = self::getReplaces($event);
         self::copyWithReplace(self::PATH, self::TEMP, $replaces);
+        copy(self::CONFIG_DIST, self::CONFIG);
     }
 
 
     public static function makeConfig(Event $event)
     {
         $replaces = self::getReplaces($event);
-        self::copyWithReplace(self::PATH . self::CONFIG, self::CONFIG, $replaces);
+        self::copyWithReplace(self::PATH . self::CONFIG_DIST, self::CONFIG_DIST, $replaces);
+    }
+
+    public static function test(Event $event)
+    {
+        $replaces = self::getReplaces($event);
+        print_r($replaces);
     }
 
 
@@ -43,7 +51,7 @@ class Skeleton
         self::cleanTemp();
         self::cleanPath();
         self::cleanGit();
-        self::removeDirectory(self::VENDOR);
+//        self::removeDirectory(self::VENDOR);
     }
 
 
@@ -86,41 +94,34 @@ class Skeleton
         $event->getIO()->write('Installing new project "'.$event->getComposer()->getPackage()->getName().'"...' . "\n");
         $event->getIO()->write("Basic configuration.\n");
 
-        $event->getIO()->write("Dev? (true) y/n: ");
-        $replaces['{{debug}}'] = self::askBoolean(true, ['y' => true, 'n' => false]);
+        $replaces['{{debug}}'] = $event->getIO()->askConfirmation("Debug? [Y/n]: ", $replaces['{{debug}}']);
+//        $replaces['{{debug}}'] = self::askBoolean(true, ['y' => true, 'n' => false]);
 
-        $event->getIO()->write("Database host (localhost): ");
-        $replaces['{{dbhost}}'] = self::askText('localhost');
+        $replaces['{{dbhost}}'] = $event->getIO()->ask('Database host [localhost]: ', 'localhost');
 
-        $event->getIO()->write("Database name (new): ");
-        $replaces['{{dbname}}'] = self::askText('new');
+        $replaces['{{dbname}}'] = $event->getIO()->ask("Database name [new]: ", 'new');
 
-        $event->getIO()->write("Database charset (cp1251): ");
-        $replaces['{{dbcharset}}'] = self::askText('cp1251');
+        $replaces['{{dbcharset}}'] = $event->getIO()->ask("Database charset [cp1251]: ", 'cp1251');
 
-        $event->getIO()->write("Database user (root): ");
-        $replaces['{{dbuser}}'] = self::askText('root');
+        $replaces['{{dbuser}}'] = $event->getIO()->ask("Database user [root]: ", 'root');
 
-        $event->getIO()->write("Database password (): ");
-        $replaces['{{dbpass}}'] = self::askText('');
+        $replaces['{{dbpass}}'] = $event->getIO()->ask("Database password []: ", '');
 
-        $event->getIO()->write("Site name, human readable text (): ");
-        $replaces['{{siteName}}'] = self::askText('');
+        $code = basename(getcwd());
+        $replaces['{{siteName}}'] = $event->getIO()->ask("Site name, human readable text [".$code." tv channel]: ", $code." tv channel");
 
-        $event->getIO()->write("Site code, unique alphanumeric code (): ");
-        $replaces['{{siteCode}}'] = self::askText('');
+        $replaces['{{siteCode}}'] = $event->getIO()->ask("Site code, unique alphanumeric code [".$code."]: ", $code);
 
-        $event->getIO()->write("Site URL (): ");
-        $replaces['{{siteURL}}'] = self::askText('');
+        $code = $replaces['{{siteCode}}'];
+        $url = "http://www.".$code.".tv";
+        $replaces['{{siteURL}}'] = $event->getIO()->ask("Site URL [".$url."]: ", $url);
 
-        $event->getIO()->write("PSR-16 cache namespace, [a-z0-9]+ (): ");
-        $replaces['{{cacheNamespace}}'] = self::askText('');
+        $cacheNamespace = preg_replace('/[^a-z0-9]/', '', strtolower($code));
+        $replaces['{{cacheNamespace}}'] = $event->getIO()->ask("PSR-16 cache namespace, [a-z0-9]+ [".$cacheNamespace."]: ", $cacheNamespace);
 
-        $event->getIO()->write("System locale (ru_RU.UTF-8): ");
-        $replaces['{{locale}}'] = self::askText('ru_RU.UTF-8');
+        $replaces['{{locale}}'] = $event->getIO()->ask("System locale [ru_RU.UTF-8]: ", 'ru_RU.UTF-8');
 
-        $event->getIO()->write("Site codepage (UTF-8): ");
-        $replaces['{{codepage}}'] = self::askText('UTF-8');
+        $replaces['{{codepage}}'] = $event->getIO()->ask("Site codepage [UTF-8]: ", 'UTF-8');
 
         $extendedReplaces = $replaces;
         foreach ($replaces as $name => $value) {

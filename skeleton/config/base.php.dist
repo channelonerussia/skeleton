@@ -1,0 +1,21 @@
+<?php
+
+return [
+
+    'route' => include __DIR__ . '/route.php',
+
+    'debug' => {{debug}},
+    'hideCounters' => {{debug}},
+
+    'pdo' => 'mysql:host={{dbhost}};dbname={{dbname}};charset={{dbcharset}}',
+    'pdoUser' => '{{dbuser}}',
+    'pdoPass' => '{{dbpass}}',
+    
+    'siteName' => '{{siteName}}',
+    'siteCode' => '{{siteCode}}',
+    'cacheNamespace' => '{{cacheNamespace}}',
+    
+    'locale' => '{{locale}}',
+    'codepage' => '{{codepage}}',
+
+];
