@@ -8,8 +8,18 @@
 
     "autoload": {
         "psr-4": {
+            "{{ siteCode }}\\scripts\\": "./scripts",
             "{{ siteCode }}\\": "./src"
         }
+    },
+
+    "scripts": {
+        "post-update-cmd": [
+            "pkvs\\scripts\\Utils::getGeoLite"
+        ],
+        "geolite": [
+            "pkvs\\scripts\\Utils::getGeoLite"
+        ]
     },
 
     "repository": {
@@ -30,6 +40,7 @@
         "php": ">=5.4.0",
         "twig/twig": "^1",
         "pkvs/pkvsEngine" : "^2",
+        "geoip2/geoip2": "~2.0",
         "composer/composer" : "^1"
     },
 
