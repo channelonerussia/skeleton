@@ -17,8 +17,14 @@
         "post-update-cmd": [
             "pkvs\\scripts\\Utils::getGeoLite"
         ],
+        "post-install-cmd": [
+            "pkvs\\scripts\\Utils::getGeoLite"
+        ],
         "geolite": [
             "pkvs\\scripts\\Utils::getGeoLite"
+        ],
+        "controller": [
+            "pkvs\\scripts\\Controller::make"
         ]
     },
 
