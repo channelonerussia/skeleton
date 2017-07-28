@@ -30,7 +30,7 @@
 npm install
 ```
 
-Первый запуск Grunt (сборка css, js, favicons, шрифтов и картинок проекта):
+Первый запуск Gulp (сборка css, js, favicons, шрифтов и картинок проекта):
 
 ```
 gulp build-init 
