@@ -11,7 +11,7 @@
 $ composer run-script geolite
 ```
 
-
+База GeoLite обновляется каждый раз при запуске команды `composer update`.
 
 ## Как пользоваться
 

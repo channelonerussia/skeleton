@@ -15,7 +15,8 @@
 
     "scripts": {
         "post-update-cmd": [
-            "pkvs\\scripts\\Utils::getGeoLite"
+            "pkvs\\scripts\\Utils::getGeoLite",
+            "php www/index.php -r init"
         ],
         "post-install-cmd": [
             "pkvs\\scripts\\Utils::getGeoLite"
