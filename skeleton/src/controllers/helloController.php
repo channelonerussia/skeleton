@@ -12,7 +12,7 @@ class helloController extends Controller
         $data = [
             'name' => 'World'
         ];
-        return $this->renderTwig('hello.twig.html', $data);
+        return $this->renderTwig('hello.twig', $data);
     }
 
 }

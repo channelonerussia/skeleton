@@ -39,7 +39,7 @@ gulp build-init
 Установка PHP зависимостей:
 
 ```
-composer install
+composer update
 ```
 
 

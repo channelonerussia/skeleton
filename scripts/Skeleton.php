@@ -44,6 +44,7 @@ class Skeleton
         self::cleanTemp();
         self::cleanPath();
         self::cleanGit();
+        unlink('composer.lock');
 //        self::removeDirectory(self::VENDOR);
     }
 
@@ -59,7 +60,7 @@ class Skeleton
  * Verify config/base.php, gulpconfig.js, package.json, composer.json
  * Change src/images/logo.png
  Run:
- $ composer install
+ $ composer update
  $ npm install
  $ gulp build-init
 ");
