@@ -44,8 +44,8 @@ class Skeleton
         self::cleanTemp();
         self::cleanPath();
         self::cleanGit();
-        unlink('composer.lock');
-//        self::removeDirectory(self::VENDOR);
+        @unlink('composer.lock');
+        self::removeDirectory(self::VENDOR);
     }
 
 
@@ -103,11 +103,12 @@ class Skeleton
         $replaces['{{dbpass}}'] = $event->getIO()->ask("Database password []: ", '');
 
         $code = basename(getcwd());
-        $replaces['{{siteName}}'] = $event->getIO()->ask("Site name, human readable text [".$code." tv channel]: ", $code." tv channel");
 
         $replaces['{{siteCode}}'] = $event->getIO()->ask("Site code, unique alphanumeric code [".$code."]: ", $code);
-
         $code = $replaces['{{siteCode}}'];
+
+        $replaces['{{siteName}}'] = $event->getIO()->ask("Site name, human readable text [".$code." tv channel]: ", $code." tv channel");
+
         $url = "http://www.".$code.".tv";
         $replaces['{{siteURL}}'] = $event->getIO()->ask("Site URL [".$url."]: ", $url);
 
@@ -147,20 +148,6 @@ class Skeleton
             }
         }
         closedir($dir);
-    }
-
-    private static function askBoolean($default, $answers)
-    {
-        $stdin = fopen('php://stdin', 'r');
-        $response = trim(fgets($stdin));
-        return isset($answers[$response]) ? $answers[$response] : $default;
-    }
-
-    private static function askText($default)
-    {
-        $stdin = fopen('php://stdin', 'r');
-        $response = trim(fgets($stdin));
-        return strlen($response) == 0 ? $default : $response;
     }
 
 
