@@ -90,23 +90,22 @@ gulp.task('copy-all', () => sequence(copyCallBackStorage));
 
 
 gulp.task('init', (done) => {
-  sequence('clean', 'copy-all', ['glyph', 'favicons'], ['js-dev', 'css-dev'], ['js-production', 'css-production'], 'cache-busting', 'images', done);
+  sequence('clean', 'copy-all', ['glyph', 'favicons'], ['js-dev', 'css-dev'], ['js-production', 'css-production'], 'copy:appletouchicon', 'copy:favicon', 'cache-busting', 'images', done);
 });
 
 // во время деплоя удалять css+js+fonts+images нельзя,
 // т.к. это происходит на рабочем сайте и во время деплоя у посетителей могут быть глюки
 gulp.task('deploy', (done) => {
-  sequence('copy-all', ['glyph', 'favicons'], ['js-production', 'css-production'], 'cache-busting', 'images', done);
+  sequence('copy-all', ['glyph', 'favicons'], ['js-production', 'css-production'], 'copy:appletouchicon', 'copy:favicon', 'cache-busting', 'images', done);
 });
 
 gulp.task('build-production', (done) => {
-  sequence('copy-all', 'glyph', ['js-production', 'css-production'], 'cache-busting', done);
+  sequence('copy-all', 'glyph', ['js-production', 'css-production'], 'copy:appletouchicon', 'copy:favicon', 'cache-busting', done);
 });
 
 gulp.task('build-dev', (done) => {
   sequence('copy-all', 'glyph', ['js-dev', 'css-dev'], done);
 });
-
 
 gulp.task('glyph', () => gulp.src('fontello-config.json')
   .pipe(fontello())
@@ -155,6 +154,7 @@ Object.keys(config.cssFiles).forEach((cssFileName) => {
     gulp.task(`css-production:${cssFileName}`, cssCallBack(cssFilesArray, cssFileName, true));
   }
 });
+
 
 gulp.task('css-dev', () => sequence(cssDevCallBackStorage));
 gulp.task('css-production', () => sequence(cssProductionCallBackStorage));

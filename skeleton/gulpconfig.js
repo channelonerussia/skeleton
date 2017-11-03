@@ -49,6 +49,8 @@ config.clean = [
   `${config.path.dst.icons}/**`,
   `${config.path.dst.fonts}/**`,
   `${config.path.dst.video}/**`,
+  `${config.path.dst.www}/favicon.ico`,
+  `${config.path.dst.www}/apple-touch-icon.png`,
 ];
 
 config.path.views.layoutOut = config.path.views.layout.replace('.orig', '');
@@ -73,6 +75,14 @@ config.copyPaths = {
   layout: {
     from: config.path.views.layout,
     to: config.path.views.layoutOut,
+  },
+  appletouchicon: {
+    from: 'web/images/icons/apple-touch-icon.png',
+    to: 'web/apple-touch-icon.png',
+  },
+  favicon: {
+    from: 'web/images/icons/favicon.ico',
+    to: 'web/favicon.ico',
   },
 };
 
