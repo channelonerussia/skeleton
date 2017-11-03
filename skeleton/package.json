@@ -54,5 +54,6 @@
     "stylelint-config-standard": "^17"
   },
   "dependencies": {
+    "global": "^4.3.2"
   }
 }
