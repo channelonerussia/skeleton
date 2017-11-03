@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+deploy_prod:
+  stage: deploy
+  script:
+    - /var/www/{{ siteCode }}/deploy.sh
+  environment:
+    name: production
+    url: {{ siteURL }}
+  only:
+    - /^[v\.0-9]+$/

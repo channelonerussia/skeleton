@@ -1,5 +1,5 @@
-jQuery(function($) {
+function initCommon($) {
+  console.log('common init ok');
+}
 
-    console.log('init ok');
-
-});
+export default initCommon;

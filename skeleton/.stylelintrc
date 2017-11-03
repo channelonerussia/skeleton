@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "indentation": 2,
+    "at-rule-no-unknown": [ true, {
+      "ignoreAtRules": [
+        "if", "else", "include", "for", "mixin"
+      ]
+    }],
+    "number-leading-zero": null,
+    "shorthand-property-no-redundant-values": false,
+    "max-nesting-depth": [3, { "ignore": ["blockless-at-rules"] }],
+    "unit-whitelist": ["em", "%", "px", "s", "deg"]
+  }
+}

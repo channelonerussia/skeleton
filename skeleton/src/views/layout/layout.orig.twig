@@ -73,15 +73,19 @@
 {{ _out|raw }}
 
 
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 {% set x = html.get('js') %}
 {% for js in x %}
     <script src="{{ js }}"></script>
 {% endfor %}
 
 {% if config.debug %}
-    <script src="/js/js.js" type="text/javascript" language="javascript"></script>
+    <script src="/js/app.js" type="text/javascript" language="javascript"></script>
 {% else %}
-    <script src="/js/js.min.js" type="text/javascript" language="javascript"></script>
+    <script src="/js/app.min.js" type="text/javascript" language="javascript"></script>
 {% endif %}
 
 </body>

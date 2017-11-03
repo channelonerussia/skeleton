@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["es2015", {
+      "targets": {
+        "browsers": ["last 3 versions", "safari >= 7", "ie >= 10"]
+      }
+    }]
+  ],
+  "plugins": [
+    "babel-polyfill"
+  ],
+  "ignore": [
+    "/node_modules/"
+  ]
+}
