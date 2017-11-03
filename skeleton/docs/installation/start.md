@@ -2,12 +2,13 @@
 
 ## Требования к установленному ПО
 
- * [PHP >= 5.4](http://www.php.net/)
+ * [PHP >= 7.1](http://www.php.net/)
  * [Composer](https://getcomposer.org/download/)
  * [Node.js](https://nodejs.org/en/download/)
  * [Ruby](http://rubyinstaller.org/)
  * [SASS](http://sass-lang.com/)
  * [Gulp](http://gulpjs.com/)
+ * [Babel, babel-cli](http://babeljs.io/) (`npm install -g babel-cli`)
 
 Для доступа Composer к [git.1tv.com](https://git.1tv.com/), настройте ключи SSH по [инструкции](https://git.1tv.com/help/ssh/README).
 
