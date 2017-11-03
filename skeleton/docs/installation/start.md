@@ -33,7 +33,7 @@ npm install
 Первый запуск Gulp (сборка css, js, favicons, шрифтов и картинок проекта):
 
 ```
-gulp build-init 
+gulp init 
 ```
 
 Установка PHP зависимостей:

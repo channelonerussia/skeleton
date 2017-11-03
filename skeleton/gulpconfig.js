@@ -1,92 +1,85 @@
-module.exports.url = '{{siteURL}}';
-module.exports.name = '{{siteName}}';
-module.exports.color = '#fff';
-module.exports.description = '{{siteName}}';
+import packageJSON from './package.json';
 
-var dstCSSPath = 'css/',
-    dstJSPath = 'js/',
-    dstFontsPath = 'fonts/',
-    dstImgPath = 'images/',
-    dstIconsPath = 'images/icons/';
-
-var path = {
-    web: {
-        icons: '/' + dstIconsPath,
-        js: '/' + dstJSPath,
-        css: '/' + dstCSSPath,
-        img: '/' + dstImgPath,
-        fonts: '/' + dstFontsPath
-    },
-    src: {
-        js: 'src/js/',
-        scss: 'src/scss/',
-        img: 'src/images/'
-    },
-    dst: {
-        www: 'www/',
-        js: 'www/' + dstJSPath,
-        css: 'www/' + dstCSSPath,
-        img: 'www/' + dstImgPath,
-        icons: 'www/' + dstIconsPath,
-        fonts: 'www/' + dstFontsPath
-    },
-    views: {
-        layout: 'src/views/layout/layout.orig.twig',
-        icons: 'src/views/layout/icons.html'
-    }
+const config = {
+  name: packageJSON.description,
+  color: '#fff',
+  dstCSSPath: 'css/',
+  dstJSPath: 'js/',
+  dstFontsPath: 'fonts/',
+  dstImgPath: 'images/',
+  dstIconsPath: 'images/icons/',
+  dstVideo: 'video/',
 };
 
-path.views.layoutOut = path.views.layout.replace('.orig', '');
+Object.assign(config, packageJSON, config);
 
-module.exports.logo = path.src.img + 'logo.png';
-
-module.exports.path = path;
-
-
-
-
-module.exports.cssFiles = {
-
-    'css': path.src.scss + 'css.scss'
-
+config.path = {
+  web: {
+    icons: `/${config.dstIconsPath}`,
+    js: `/${config.dstJSPath}`,
+    css: `/${config.dstCSSPath}`,
+    img: `/${config.dstImgPath}`,
+    fonts: `/${config.dstFontsPath}`,
+  },
+  src: {
+    js: 'src/js/',
+    scss: 'src/scss/',
+    img: 'src/images/',
+    video: 'src/video/',
+  },
+  dst: {
+    www: 'www/',
+    js: `www/${config.dstJSPath}`,
+    css: `www/${config.dstCSSPath}`,
+    img: `www/${config.dstImgPath}`,
+    icons: `www/${config.dstIconsPath}`,
+    fonts: `www/${config.dstFontsPath}`,
+    video: `www/${config.dstVideo}`,
+  },
+  views: {
+    layout: 'src/views/layout/layout.orig.twig',
+    icons: 'src/views/layout/icons.html',
+  },
 };
 
-
-
-
-
-module.exports.jsFiles = {
-    'js': [ // js.js и js.min.js
-        'node_modules/jquery/dist/jquery.min.js',
-        path.src.js + 'common.js'
-    ]
-
-//    'example' :  path.src.js + 'example.js',
-
-};
-
-
-
-module.exports.copyPaths = {
-/*    'video': {
-        from: './video/!**!/!*',
-        to: path.dst.www + 'video'
-    },*/
-
-    'layout' : {
-        from: path.views.layout,
-        to: path.views.layoutOut
-    }
-};
-
-
-
-
-var cacheBustingConfig = {};
-cacheBustingConfig[path.views.layoutOut] = [
-    dstCSSPath + 'css.min.css',
-    dstJSPath + 'js.min.js'
+config.clean = [
+  `${config.path.dst.js}/**`,
+  `${config.path.dst.css}/**`,
+  `${config.path.dst.img}/**`,
+  `${config.path.dst.icons}/**`,
+  `${config.path.dst.fonts}/**`,
+  `${config.path.dst.video}/**`,
 ];
 
-module.exports.cacheBustingConfig = cacheBustingConfig;
+config.path.views.layoutOut = config.path.views.layout.replace('.orig', '');
 
+config.logo = `${config.path.src.img}logo.png`;
+
+config.cssFiles = {
+  css: `${config.path.src.scss}css.scss`,
+};
+
+config.jsFiles = {
+  app: [
+    `${config.path.src.js}app.js`,
+  ],
+};
+
+config.copyPaths = {
+  video: {
+    from: `${config.path.src.video}**/*`,
+    to: config.path.dst.video,
+  },
+  layout: {
+    from: config.path.views.layout,
+    to: config.path.views.layoutOut,
+  },
+};
+
+config.cacheBustingConfig = {};
+config.cacheBustingConfig[config.path.views.layoutOut] = [
+  `${config.dstCSSPath}css.min.css`,
+  `${config.dstJSPath}app.min.js`,
+];
+
+export default config;
