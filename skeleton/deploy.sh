@@ -68,7 +68,7 @@ failure() {
 
 
 step "Moving to deploy project directory"
-try cd /var/www/player2.1tv.com
+try cd /var/www/{{siteCode}}
 
 step "GIT pull"
 try sudo -u apache git pull
@@ -81,10 +81,6 @@ try sudo -u apache gulp deploy
 
 step "Updating backend dependencies"
 try sudo -u apache composer install --no-dev --prefer-dist --optimize-autoloader --classmap-authoritative
-
-step "Clearing cache"
-try sudo -u apache php bin/console cache:clear --env=prod --no-debug --no-warmup
-try sudo -u apache php bin/console cache:warmup --env=prod
 
 success "Complete"
 

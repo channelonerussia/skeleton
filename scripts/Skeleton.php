@@ -59,7 +59,8 @@ class Skeleton
  * Initialize Git in project directory (follow the instructions from previous step, see \"Existing folder\")
  * Verify config/base.php, gulpconfig.js, package.json, composer.json
  * Change src/images/logo.png
- Run:
+ * Run:
+ $ cd  " . basename(getcwd()) . "
  $ composer update
  $ npm install
  $ gulp build-init
