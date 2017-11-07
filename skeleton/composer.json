@@ -1,56 +1,63 @@
 {
-    "name": "pkvs/{{ siteCode }}",
-    "license": "proprietary",
-    "type": "project",
-    "description": "{{ siteName }}",
+  "name": "pkvs/{{ siteCode }}",
+  "license": "proprietary",
+  "type": "project",
+  "description": "{{ siteName }}",
 
-    "homepage": "https://git.1tv.com/pkvs/{{ siteCode }}",
+  "homepage": "https://git.1tv.com/pkvs/{{ siteCode }}",
 
-    "autoload": {
-        "psr-4": {
-            "{{ siteCode }}\\scripts\\": "./scripts",
-            "{{ siteCode }}\\": "./src"
-        }
-    },
-
-    "scripts": {
-        "post-update-cmd": [
-            "pkvs\\scripts\\Utils::getGeoLite",
-            "php www/index.php -r init"
-        ],
-        "post-install-cmd": [
-            "pkvs\\scripts\\Utils::getGeoLite"
-        ],
-        "geolite": [
-            "pkvs\\scripts\\Utils::getGeoLite"
-        ],
-        "controller": [
-            "pkvs\\scripts\\Controller::make"
-        ]
-    },
-
-    "repository": {
-        "type": "git",
-        "url": "git@git.1tv.com:pkvs/{{ siteCode }}.git"
-    },
-
-    "prefer-stable" : true,
-
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@git.1tv.com:pkvs/pkvsEngine.git"
-        }
-    ],
-
-    "require": {
-        "php": ">=7.1",
-        "twig/twig": "^1",
-        "pkvs/pkvsEngine" : "^2",
-        "geoip2/geoip2": "~2.0"
-    },
-
-    "require-dev" : {
+  "autoload": {
+    "psr-4": {
+      "{{ siteCode }}\\scripts\\": "./scripts",
+      "{{ siteCode }}\\": "./src"
     }
+  },
 
+  "scripts": {
+    "post-update-cmd": [
+      "pkvs\\scripts\\Utils::getGeoLite",
+      "php www/index.php -r init"
+    ],
+    "post-install-cmd": [
+      "pkvs\\scripts\\Utils::getGeoLite"
+    ],
+    "geolite": [
+      "pkvs\\scripts\\Utils::getGeoLite"
+    ],
+    "controller": [
+      "pkvs\\scripts\\Controller::make"
+    ],
+    "phpcs": [
+      "php ./vendor/bin/phpcs"
+    ],
+    "test": [
+      "php ./vendor/bin/phpunit"
+    ]
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git@git.1tv.com:pkvs/{{ siteCode }}.git"
+  },
+
+  "prefer-stable" : true,
+
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@git.1tv.com:pkvs/pkvsEngine.git"
+    }
+  ],
+
+  "require": {
+    "php": ">=7.1",
+    "twig/twig": "^1",
+    "pkvs/pkvsEngine" : "^2",
+    "geoip2/geoip2": "~2.0"
+  },
+
+  "require-dev" : {
+    "squizlabs/php_codesniffer": "3.*",
+    "phpunit/phpunit": "4.*"
+  }
 }

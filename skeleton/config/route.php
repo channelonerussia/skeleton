@@ -1,10 +1,8 @@
 <?php
 
-return array(
-
-    'index'  =>  array(
-        'title'     =>  'Hello, world!',
-        'controller'=>  'hello',
-    ),
-
-);
+return [
+    'index' => [
+        'title'      => 'Hello, world!',
+        'controller' => 'hello',
+    ],
+];
