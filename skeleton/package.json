@@ -1,9 +1,10 @@
 {
-  "name": "{{ siteCode }}",
+  "name": "@pkvs/{{ siteCode }}",
   "url": "{{ siteURL }}",
   "version": "0.0.1",
   "description": "{{ siteName }}",
-  "license": "ISC",
+  "license": "UNLICENSED",
+  "private": true,
   "homepage": "https://git.1tv.com/pkvs/{{ siteCode }}",
   "repository": {
     "type": "git",
@@ -12,7 +13,7 @@
   "scripts": {
     "preversion": "",
     "version": "",
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && git push --tags"
   },
   "author": "Dmitry Elfimov",
   "contributors": [],
